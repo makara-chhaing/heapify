@@ -1,0 +1,15 @@
+/Users/chanmakara/Desktop/SIT221/Assessments/task8.1/bin/Debug/net6.0/task8.1.deps.json
+/Users/chanmakara/Desktop/SIT221/Assessments/task8.1/bin/Debug/net6.0/task8.1.runtimeconfig.json
+/Users/chanmakara/Desktop/SIT221/Assessments/task8.1/bin/Debug/net6.0/task8.1.runtimeconfig.dev.json
+/Users/chanmakara/Desktop/SIT221/Assessments/task8.1/bin/Debug/net6.0/task8.1.dll
+/Users/chanmakara/Desktop/SIT221/Assessments/task8.1/bin/Debug/net6.0/ref/task8.1.dll
+/Users/chanmakara/Desktop/SIT221/Assessments/task8.1/bin/Debug/net6.0/task8.1.pdb
+/Users/chanmakara/Desktop/SIT221/Assessments/task8.1/obj/Debug/net6.0/task8.1.csprojAssemblyReference.cache
+/Users/chanmakara/Desktop/SIT221/Assessments/task8.1/obj/Debug/net6.0/task8.1.GeneratedMSBuildEditorConfig.editorconfig
+/Users/chanmakara/Desktop/SIT221/Assessments/task8.1/obj/Debug/net6.0/task8.1.AssemblyInfoInputs.cache
+/Users/chanmakara/Desktop/SIT221/Assessments/task8.1/obj/Debug/net6.0/task8.1.AssemblyInfo.cs
+/Users/chanmakara/Desktop/SIT221/Assessments/task8.1/obj/Debug/net6.0/task8.1.csproj.CoreCompileInputs.cache
+/Users/chanmakara/Desktop/SIT221/Assessments/task8.1/obj/Debug/net6.0/task8.1.dll
+/Users/chanmakara/Desktop/SIT221/Assessments/task8.1/obj/Debug/net6.0/ref/task8.1.dll
+/Users/chanmakara/Desktop/SIT221/Assessments/task8.1/obj/Debug/net6.0/task8.1.pdb
+/Users/chanmakara/Desktop/SIT221/Assessments/task8.1/obj/Debug/net6.0/task8.1.genruntimeconfig.cache
