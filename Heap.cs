@@ -92,6 +92,62 @@ namespace Heap
             }
         }
 
+        private void DownHeap(int start)
+        {
+            int position = start;
+            int next = 0;
+            while (position * 2 <= Count)
+            {
+                if (position * 2 == Count)
+                {
+                    if (comparer.Compare(data[position].Key, data[position * 2].Key) > 0)
+                    {
+                        next = position * 2;
+                        Swap(position, next);
+                        
+                    }
+                    return;
+                }
+                else
+                {
+                    if (comparer.Compare(data[position].Key, data[position * 2].Key) > 0
+                && comparer.Compare(data[position * 2].Key, data[position * 2 + 1].Key) < 0)
+                    {
+                        next = position * 2;
+                        Swap(position, next);
+                    }
+                    else if (comparer.Compare(data[position].Key, data[position * 2 + 1].Key) > 0
+                    && comparer.Compare(data[position * 2].Key, data[position * 2 + 1].Key) > 0)
+                    {
+                        next = position * 2 + 1;
+                        Swap(position, next);
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+                // if (comparer.Compare(data[position*2].Key, data[position * 2 + 1].Key) < 0){
+                //         next = position*2;
+                //         if(comparer.Compare(data[position].Key, data[next].Key) > 0){
+                //             Swap(position, next);
+                //         }else{
+                //             return;
+                //         }
+                //     }else{
+                //         next = position * 2 + 1;
+                //         if(comparer.Compare(data[position].Key, data[next].Key) > 0){
+                //             Swap(position, next);
+
+                //         }else{
+                //             return;
+                //         }
+
+                //     }
+                position = next;
+            }
+        }
+
         // This method swaps two elements in the list representing the heap. 
         // Use it when you need to swap nodes in your solution, e.g. in DownHeap() that you will need to develop.
         private void Swap(int from, int to)
@@ -105,7 +161,7 @@ namespace Heap
 
         public void Clear()
         {
-            for (int i = 0; i<=Count; i++) data[i].Position = -1;
+            for (int i = 0; i <= Count; i++) data[i].Position = -1;
             data.Clear();
             data.Add(new Node(default(K), default(D), 0));
             Count = 0;
@@ -129,31 +185,84 @@ namespace Heap
         // Read the instruction carefully, study the code examples from above as they should help you to write the rest of the code.
         public IHeapifyable<K, D> Delete()
         {
-            // You should replace this plug by your code.
-            throw new NotImplementedException();
+            if (Count == 0) throw new InvalidOperationException("The heap is empty.");
+            Node n;
+            Swap(1, Count);
+            n = data[Count];
+            data.RemoveAt(Count);
+            Count--;
+            DownHeap(1);
+            return (IHeapifyable<K, D>)n;
+
         }
 
         // Builds a minimum binary heap using the specified data according to the bottom-up approach.
         public IHeapifyable<K, D>[] BuildHeap(K[] keys, D[] data)
         {
-            // You should replace this plug by your code.
-            throw new NotImplementedException();
+            if (Count != 0) throw new InvalidOperationException("The heap is not empty.");
+            for (int i = 0; i < keys.Length; i++)
+            {
+                Count++;
+                Node node = new Node(keys[i], data[i], Count);
+                this.data.Add(node);
+            }
+            // Console.WriteLine("After input:" + this.ToString());
+            Node[] nodes = new Node[keys.Length];
+            for (int i = keys.Length; i > 0; i--)
+            {
+                // Console.WriteLine("time:{0} orders:" + this.ToString(),i);
+                nodes[i - 1] = this.data[i];
+                DownHeap(i);
+            }
+
+            return (IHeapifyable<K, D>[])nodes;
         }
 
         public void DecreaseKey(IHeapifyable<K, D> element, K new_key)
         {
-            // You should replace this plug by your code.
-            throw new NotImplementedException();
+            int index = element.Position;
+            if (comparer.Compare(element.Key, data[index].Key) != 0)
+            {
+                throw new InvalidOperationException("Invalid element given!");
+            }
+            data[index].Key = new_key;
+            UpHeap(index);
+
         }
         public IHeapifyable<K, D> DeleteElement(IHeapifyable<K, D> element)
         {
-            // You should replace this plug by your code.
-            throw new NotImplementedException();
+            if (Count == 0) throw new InvalidOperationException("The heap is empty.");
+            Node n;
+            int pos = element.Position;
+            Swap(pos, Count);
+            n = data[Count];
+            data.RemoveAt(Count);
+            Count--;
+            DownHeap(pos);
+            return (IHeapifyable<K, D>)n;
         }
         public IHeapifyable<K, D> KthMinElement(int k)
         {
-            // You should replace this plug by your code.
-            throw new NotImplementedException();
+            if(k < 1 || k > Count) throw new InvalidOperationException("Invalid number.");
+            int i = 1;
+
+            IHeapifyable<K, D>[] nodes = new Node[k];
+
+            // This takes O(klogn) since it deletes (O(logn)) k elements from heap and save in nodes.
+            while(i < k){
+                nodes[i] = Delete();
+                i++;
+            }
+
+            IHeapifyable<K, D> temp = Min();
+
+            // This takes O(klogn) since it inserts (O(logn)) k elements back to Heap.
+            for(int j = 1; j < k; j++){
+                Insert(nodes[j].Key, nodes[j].Data);
+            }
+
+            // So the total complexity of this is O(klogn).
+            return temp;
         }
 
     }
